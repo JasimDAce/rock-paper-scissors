@@ -24,8 +24,6 @@ else{
 Computer`;
 }
 
-
-
 document.querySelector('.js-result')
 .innerHTML = `${outcome}`;
 }
@@ -69,4 +67,28 @@ function resetScore() {
     };
     localStorage.removeItem('score');
     resultAlert('', '', '');
+}
+let isPlaying = false;
+let intervalId;
+function autoPlay(){
+    if(!isPlaying){
+        intervalId = setInterval(function(){
+            let choose = chooseRandom();
+            let result;
+            if (choose === 0) {
+                result = 'rock';
+            } else if (choose === 1) {
+                result = 'paper';
+            } else {
+                result = 'scissors';
+            }
+            playGame(result);
+        },1000);
+        isPlaying = true;
+    }
+    else{
+        clearInterval(intervalId);
+        isPlaying = false;
+    }
+    
 }
